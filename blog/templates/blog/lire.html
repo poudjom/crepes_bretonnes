@@ -1,0 +1,7 @@
+{% block content %}
+		<b><p>{{ article.titre }}</p></b>
+		<p>{{ article.contenu }}</p>
+		<p><i>{{ article.date }} &nbsp;&nbsp; {{ article.auteur }} </i></p>
+{% endblock %}
+
+<a href="{% url "acceuil" %}"> Revenir à la page d'acceuil </a> 

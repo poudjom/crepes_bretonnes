@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- Ajout de commentaire sur une ligne -->
+
+{# commentaire sur une page #}
+
+{% comment %}
+    Ceci est une page d'exemple. Elle est composée de 3 tableaux :
+    - tableau des ventes
+    - locations
+    - retours en garantie
+{% endcomment %}
+
+{% block nav %}
+
+{% endblock %}
+
+{% block content %}
+<center><h1> Liste des articles </h1></center>
+	{% for item in articles %}
+		<b><p>{{ item.titre }}</p></b>
+		<p>{{ item.contenu | truncatewords:80 }}...&nbsp; <a href="{% url "lire" id=item.id slug=item.slug %}"> lire la suite </a> </p>
+		<p><i>{{ item.date }} &nbsp;&nbsp; {{ item.auteur }} </i></p>
+	{% endfor %}
+{% endblock %}
+
