@@ -1,0 +1,16 @@
+{% block content %}
+{% if envoie %} Enregistrement effectué {% endif %}
+<form action="{% url "categorie" 789 %}" method = POST>
+	{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}
+<br/><br/>
+<h1> LISTE DES CATEGORIES </h1>
+{% block pieds %}
+	{% for item in categorie %}
+		<p>{{ item }} <a href= {% url "categorie" item.id %} >Modifier</a></p>
+	{% endfor %}
+{% endblock %}

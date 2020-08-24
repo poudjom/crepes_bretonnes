@@ -20,6 +20,7 @@ class Article(models.Model):
         return self.titre
 
 
+
 class Categorie(models.Model):
     nom = models.CharField(max_length = 30)
      
@@ -28,4 +29,15 @@ class Categorie(models.Model):
          
     def __str__(self):
         return self.nom
-         
+
+    
+class Personnel(models.Model):
+    matricule = models.CharField(max_length = 5)
+    prenom = models.CharField(max_length = 50)
+    nom = models.CharField(max_length = 50)
+    
+    class Meta:
+        verbose_name = 'Personnel'
+        
+    def __str__(self):
+        return self.nom

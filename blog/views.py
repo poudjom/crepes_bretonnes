@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from datetime import datetime
-from .models import Article
+from .models import *
+from .forms import *
+
 # Create your views here.
 
 def home(request):
@@ -32,3 +34,38 @@ def date(request):
 def addition(request, nombre1, nombre2):
 	somme = nombre1 + nombre2
 	return render(request, 'blog/addition.html', locals())
+
+
+def categorie(request, id):
+	#cat = Categorie()
+	#form = CategorieForms(request.POST or None)
+	
+	try:
+		cat = Categorie.objects.get(id = id)
+		form = CategorieForms(instance = cat)
+	except Article.DoesNotExist:
+		form = CategorieForms(request.POST or None)
+	
+		if form.is_valid():
+			cat = Categorie()
+			cat.nom = form.cleaned_data['nom']
+			cat.save()
+			envoie = True
+	
+	categorie = Categorie.objects.all()
+	return render(request, 'blog/categorie.html', locals())
+
+
+def article(request, id):
+	form = ArticleForm(request.POST or None)
+	if form.is_valid():
+		envoie = True
+	article = Article.objects.all()
+	return render(request, 'blog/article.html', locals())
+
+
+def personnel(request):
+	form = PersonnelForm(request.POST or None)
+	if form.is_valid():
+		envoie = True
+	return render(request, 'blog/personnel.html', locals())

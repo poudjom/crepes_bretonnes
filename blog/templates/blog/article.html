@@ -1,0 +1,32 @@
+{% block content %}
+	<form action = "{% url "article" 963 %}" method = POST>
+		{% csrf_token %}
+    	{{ form.as_p }}
+    	<input type="submit" value="Submit" />
+	</form>
+{% endblock %}
+
+
+{% block pieds %}
+<table border = "1px">
+<tr>
+	<td>Titre</td>
+	<td>Auteur</td>
+	<td>slug</td>
+	<td>Contenu</td>
+	<td>date</td>
+	<td>action</td>
+</tr>
+	{% for item in article %}
+		{{ item.titre }} &nbsp;&nbsp; {{ item.auteur }}
+		<tr>
+			<td>{{ item.titre }}</td>
+			<td>{{ item.auteur }}</td>
+			<td>{{ item.slug }}</td>
+			<td>{{ item.contenu | truncatewords:20 }}</td>
+			<td>{{ item.date}}</td>
+			<td><a href= {% url "article" item.id %} >Modifier</a></td>
+		</tr>
+	{% endfor %}
+</table>
+{% endblock %}
